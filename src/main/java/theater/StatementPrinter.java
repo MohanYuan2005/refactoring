@@ -45,15 +45,8 @@ public class StatementPrinter {
             final Play play = plays.get(p.getPlayID());
             final int thisAmount = amountFor(p, play);
 
-            // Volume credits
-            volumeCredits += Math.max(
-                    p.getAudience() - Constants.BASE_VOLUME_CREDIT_THRESHOLD, 0);
-
-            // Extra credit for every five comedy attendees
-            if ("comedy".equals(play.getType())) {
-                volumeCredits += p.getAudience()
-                        / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
-            }
+            // Extracted in Task 2.2
+            volumeCredits += volumeCreditsFor(p, play);
 
             // Print line for this order
             result.append(String.format(
@@ -114,5 +107,24 @@ public class StatementPrinter {
         }
 
         return result;
+    }
+
+    /**
+     * Calculates volume credits for a performance.
+     *
+     * @param performance performance data
+     * @param play        associated play
+     * @return earned volume credits
+     */
+    private int volumeCreditsFor(Performance performance, Play play) {
+        int credits = Math.max(
+                performance.getAudience() - Constants.BASE_VOLUME_CREDIT_THRESHOLD, 0);
+
+        if ("comedy".equals(play.getType())) {
+            credits += performance.getAudience()
+                    / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
+        }
+
+        return credits;
     }
 }
