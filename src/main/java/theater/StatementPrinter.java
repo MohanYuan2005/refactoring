@@ -31,31 +31,25 @@ public class StatementPrinter {
      * @throws RuntimeException if one of the play types is not known
      */
     public String statement() {
-        int totalAmount = 0;
-        int volumeCredits = 0;
-
         final StringBuilder result =
                 new StringBuilder("Statement for " + invoice.getCustomer()
                         + System.lineSeparator());
 
         final NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
 
+        // 只负责逐行输出，不再在这里做总和计算
         for (Performance p : invoice.getPerformances()) {
-
-            // After Task 2.3
             PerformanceData perf = enrichPerformance(p);
-
-            // After Task 2.2
-            volumeCredits += perf.getVolumeCredits();
 
             result.append(String.format(
                     "  %s: %s (%s seats)%n",
                     perf.getPlay().getName(),
                     frmt.format(perf.getAmount() / Constants.PERCENT_FACTOR),
                     perf.getAudience()));
-
-            totalAmount += perf.getAmount();
         }
+
+        final int totalAmount = totalAmount();
+        final int volumeCredits = totalVolumeCredits();
 
         result.append(String.format("Amount owed is %s%n",
                 frmt.format(totalAmount / Constants.PERCENT_FACTOR)));
@@ -145,5 +139,37 @@ public class StatementPrinter {
                 amount,
                 volume
         );
+    }
+
+    /**
+     * Computes the total amount over all performances.
+     *
+     * @return total amount in cents
+     */
+    private int totalAmount() {
+        int result = 0;
+
+        for (Performance p : invoice.getPerformances()) {
+            PerformanceData perf = enrichPerformance(p);
+            result += perf.getAmount();
+        }
+
+        return result;
+    }
+
+    /**
+     * Computes the total volume credits over all performances.
+     *
+     * @return total volume credits
+     */
+    private int totalVolumeCredits() {
+        int result = 0;
+
+        for (Performance p : invoice.getPerformances()) {
+            PerformanceData perf = enrichPerformance(p);
+            result += perf.getVolumeCredits();
+        }
+
+        return result;
     }
 }
