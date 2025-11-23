@@ -5,7 +5,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * This class generates a statement for a given invoice of performances.
+ * This class generates a statement for a given invoice of performance.
  */
 public class StatementPrinter {
     private Invoice invoice;
