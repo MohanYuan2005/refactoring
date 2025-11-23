@@ -1,5 +1,22 @@
-011c1a5 (HEAD -> main) Task 1.1: fix CheckStyle issues
-2b4f164 (origin/main, origin/HEAD) fixed tests for the not-for-credit tasks; parameter ordering and ensuring consistent line endings.
+d405783 Task 2.4: extract totalAmount and totalVolumeCredits
+af49d4b Task 2.3: extract enrichPerformance
+27088a7 Task 2.2: extract volumeCreditsFor method
+2929417 Task 2.2: extract volumeCreditsFor method
+9b9954f Task 2.1: extract amountFor method
+619b9f3 Task 1.2: fix CheckStyle issues
+09fde49 Task 2.4: extract totalAmount and totalVolumeCredits
+06b3c28 Task 2.3: extract totalAmount and totalVolumeCredits
+23e7864 Task 2.2: extract totalAmount and totalVolumeCredits
+8b95824 Task 1.2: extract totalAmount and totalVolumeCredits
+51ec586 Task 2.4: extract totalAmount and totalVolumeCredits
+a78215e Task 2.4: extract totalAmount and totalVolumeCredits
+4cb28c6 Task 2.4: extract totalAmount and totalVolumeCredits
+cc80977 Task 2.3: extract enrichPerformance
+7ba1148 Task 2.2: extract volumeCreditsFor method
+eb8c256 Task 1.1: fix CheckStyle issues
+04458c7 Task 1.2: update git log
+011c1a5 Task 1.1: fix CheckStyle issues
+2b4f164 fixed tests for the not-for-credit tasks; parameter ordering and ensuring consistent line endings.
 ff5004e adding shortcut keys for Inline Variable (Re: Piazza question)
 b545fe2 clarifying extracted method names in README.md
 a0124c9 fixing starter file
