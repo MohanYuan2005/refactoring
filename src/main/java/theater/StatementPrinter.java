@@ -42,20 +42,19 @@ public class StatementPrinter {
 
         for (Performance p : invoice.getPerformances()) {
 
-            final Play play = plays.get(p.getPlayID());
-            final int thisAmount = amountFor(p, play);
+            // After Task 2.3
+            PerformanceData perf = enrichPerformance(p);
 
-            // Extracted in Task 2.2
-            volumeCredits += volumeCreditsFor(p, play);
+            // After Task 2.2
+            volumeCredits += perf.getVolumeCredits();
 
-            // Print line for this order
             result.append(String.format(
                     "  %s: %s (%s seats)%n",
-                    play.getName(),
-                    frmt.format(thisAmount / Constants.PERCENT_FACTOR),
-                    p.getAudience()));
+                    perf.getPlay().getName(),
+                    frmt.format(perf.getAmount() / Constants.PERCENT_FACTOR),
+                    perf.getAudience()));
 
-            totalAmount += thisAmount;
+            totalAmount += perf.getAmount();
         }
 
         result.append(String.format("Amount owed is %s%n",
@@ -126,5 +125,25 @@ public class StatementPrinter {
         }
 
         return credits;
+    }
+
+    /**
+     * Creates an enriched performance data object.
+     *
+     * @param performance raw performance
+     * @return enriched performance
+     */
+    private PerformanceData enrichPerformance(Performance performance) {
+        Play play = plays.get(performance.getPlayID());
+        int amount = amountFor(performance, play);
+        int volume = volumeCreditsFor(performance, play);
+
+        return new PerformanceData(
+                performance.getPlayID(),
+                performance.getAudience(),
+                play,
+                amount,
+                volume
+        );
     }
 }
