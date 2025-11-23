@@ -17,7 +17,7 @@ public class StatementPrinter {
     }
 
     /**
-     * Return a formatted statement of the invoice associated with this printer.
+     * Returns a formatted statement of the invoice associated with this printer.
      * @return the formatted statement
      * @throws RuntimeException if one of the play types is not known
      */
